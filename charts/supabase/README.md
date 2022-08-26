@@ -35,7 +35,7 @@ kubectl -n default create secret generic demo-supabase-smtp \
 # Create DB secret
 kubectl -n default create secret generic demo-supabase-db \
   --from-literal=username='postgres' \
-  --from-literal=password='example123456' 
+  --from-literal=password='example123456'
 
 # Install the chart
 helm -n default install demo -f values.example.yaml .
@@ -44,7 +44,7 @@ helm -n default install demo -f values.example.yaml .
 The first deployment can take some time to complete (especially auth service). You can view the status of the pods using:
 
 ```bash
-kubectl -n default get pod 
+kubectl -n default get pod
 
 NAME                                      READY   STATUS    RESTARTS      AGE
 demo-supabase-auth-78547c5c8d-chkbm       1/1     Running   2 (40s ago)   47s
@@ -73,7 +73,7 @@ If you just use the `value.example.yaml` file, you can access the API or the Stu
 
 ```Bash
 # Uninstall Helm chart
-helm -n default uninstall demo 
+helm -n default uninstall demo
 
 # Delete secrets
 kubectl -n default delete secret demo-supabase-db
@@ -101,13 +101,15 @@ If you want to use mail, consider to adjust the following values in `values.yaml
 - `SMTP_PORT`
 - `SMTP_SENDER_NAME`
 
+Warning: **Set these values to dummy values or the auth module won't start**
+
 ### JWT Secret
 
 We encourage you to use your own JWT keys by generating a new Kubernetes secret and reference it in `values.yaml`:
 
 ```yaml
-  jwt:
-    secretName: "JWT_SECRET_NAME"
+jwt:
+  secretName: "JWT_SECRET_NAME"
 ```
 
 The secret can be created with kubectl via command-line:
@@ -127,8 +129,8 @@ kubectl -n NAMESPACE create secret generic JWT_SECRET_NAME \
 Connection credentials for the SMTP mail server will also be provided via Kubernetes secret referenced in `values.yaml`:
 
 ```yaml
-  smtp:
-    secretName: "SMTP_SECRET_NAME"
+smtp:
+  secretName: "SMTP_SECRET_NAME"
 ```
 
 The secret can be created with kubectl via command-line:
@@ -144,8 +146,8 @@ kubectl -n NAMESPACE create secret generic SMTP_SECRET_NAME \
 DB credentials will also be stored in a Kubernetes secret and referenced in `values.yaml`:
 
 ```yaml
-  db:
-    secretName: "DB_SECRET_NAME"
+db:
+  secretName: "DB_SECRET_NAME"
 ```
 
 The secret can be created with kubectl via command-line:
@@ -179,7 +181,7 @@ Depending on your Kubernetes version you might want to fill the `className` prop
 ```yml
 kong:
   ingress:
-    enabled: 'true'
+    enabled: "true"
     className: "nginx"
     annotations:
       nginx.ingress.kubernetes.io/rewrite-target: /
