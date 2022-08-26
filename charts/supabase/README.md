@@ -90,6 +90,7 @@ You should consider to adjust the following values in `values.yaml`:
 - `DB_SECRET_NAME`: Reference to Kubernetes secret with Postgres credentials `username` & `password`
 - `RELEASE_NAME`: Name used for helm release
 - `NAMESPACE`: Namespace used for the helm release
+- `DATABASE`: The name of the service pointing to your PostgreSQL pod(s)
 - `API.EXAMPLE.COM` URL to Kong API
 - `STUDIO.EXAMPLE.COM` URL to Studio
 
